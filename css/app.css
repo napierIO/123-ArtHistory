@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+body {
+  background: #f9f9f9;
+}
+
 .wrapper {
   height: 100vh;
   width: 100vw;
@@ -19,13 +23,120 @@
 }
 
 .card {
-  height: 20em;
-  width: 20em;
-  background: #2196f3;
-  transition: transform .4s ease-in-out;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
-.card:hover {
-  transform: rotateY(180deg);
-  transform-origin: center;
+.card__face {
+  position: relative;
+  height: 20em;
+  width: 20em;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /*box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);*/
 }
+
+.card__face:hover {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.card__face--front, .card__face--back {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card__face--front {
+  z-index: 2;
+}
+
+.card__face--back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.card__input {
+  height: 3em;
+  width: 17em;
+  margin: 2em 0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.card__input--field {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 1.75em;
+  font-weight: 100;
+  color: #ddd;
+}
+
+.card__input::after {
+  content: '';
+  display: block;
+  width: 100%;
+  border: 1px solid transparent;
+  border-bottom-color: #eee;
+  /*width: 0;  toggled on .input--filled  */
+}
+
+.card__input--label {
+  color: #eee;
+  position: absolute;
+  top: .85em;
+  font-size: 1.25em;
+  font-weight: 100;
+  letter-spacing: .75px;
+  text-transform: uppercase;
+}
+
+.input--filled {
+  -webkit-animation: LabelUp .2s ease-in-out forwards;
+  animation: LabelUp .2s ease-in-out forwards;
+}
+
+@keyframes LabelUp {
+  to {
+    font-size: .65em;
+    top: -1.25em;
+    color: #ED1C24;
+  }
+}
+
+
+/*
+
+ToDo:
+  - Add JS to file for toggling classes
+
+*/
